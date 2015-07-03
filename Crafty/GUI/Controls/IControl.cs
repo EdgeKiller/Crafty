@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Crafty.GUI
+namespace Crafty.GUI.Controls
 {
-    public interface Control
+    public interface IControl
     {
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);

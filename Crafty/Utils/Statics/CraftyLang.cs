@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Crafty.Utils.Statics
 {
@@ -9,7 +6,10 @@ namespace Crafty.Utils.Statics
     {
         private static Dictionary<string, string[]> lDic = new Dictionary<string, string[]>()
         {
-            
+            {"singleplayer", new string[]{"Singleplayer", "Solo"}},
+            {"multiplayer", new string[]{"Multiplayer", "Multijoueur"}},
+            {"settings", new string[]{"Settings", "Parametres"}},
+            {"quit", new string[]{"Quit", "Quitter"}}
         };
 
         public static string GetData(string key)
@@ -24,7 +24,7 @@ namespace Crafty.Utils.Statics
             }
             else { return null; }
         }
-        
+
         public static void SetLanguage(int langIndex)
         {
             if (langIndex >= 0 && langIndex <= 1)

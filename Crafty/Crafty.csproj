@@ -57,10 +57,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Content\CraftyContent.cs" />
-    <Compile Include="GUI\Control.cs" />
+    <Compile Include="GUI\Controls\Background.cs" />
+    <Compile Include="GUI\Controls\IControl.cs" />
     <Compile Include="GUI\GUIManager.cs" />
     <Compile Include="GUI\GUI.cs" />
+    <Compile Include="GUI\Controls\TextButton.cs" />
+    <Compile Include="GUI\MainGUI.cs" />
     <Compile Include="Screens\IScreen.cs" />
+    <Compile Include="Screens\MainScreen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
     <Compile Include="Utils\Statics\CraftyConfig.cs" />
     <Compile Include="Utils\Statics\CraftySettings.cs" />
@@ -68,6 +72,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Statics\CraftyLang.cs" />
+    <Compile Include="Utils\Statics\KMState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

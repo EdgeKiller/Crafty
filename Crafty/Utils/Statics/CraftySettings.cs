@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Crafty.Utils.Statics
@@ -14,6 +12,8 @@ namespace Crafty.Utils.Statics
         public static readonly string ConfigFile = "crafty.cfg";
         public static readonly DirectoryInfo TextureFolder = new DirectoryInfo("resources/textures");
 
-        public static readonly Vector2 VirtualScreen = new Vector2(1920, 1080);
+        public static Game Game { get; set; }
+
+        public static readonly Point VirtualScreen = new Point(1920, 1080);
     }
 }

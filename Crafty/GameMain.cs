@@ -5,6 +5,7 @@ using Crafty.Utils.Statics;
 using Crafty.GUI;
 using System;
 using Crafty.Content;
+using Crafty.Screens;
 
 namespace Crafty
 {
@@ -23,6 +24,7 @@ namespace Crafty
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            CraftySettings.Game = this;
         }
 
         /// <summary>
@@ -46,7 +48,8 @@ namespace Crafty
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            CraftyContent.Load(GraphicsDevice);
+            CraftyContent.Load(Content, GraphicsDevice);
+            ScreenManager.SetScreen(new MainScreen());
         }
 
         /// <summary>
@@ -63,8 +66,14 @@ namespace Crafty
         /// <param name="gameTime">GameTime</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            KMState.GamePadState = GamePad.GetState(PlayerIndex.One);
+            KMState.KeyboardState = Keyboard.GetState();
+            KMState.MouseState = Mouse.GetState();
+
+            if (KMState.KeyboardState.IsKeyDown(Keys.Escape))
                 Exit();
+
+            ScreenManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -79,7 +88,8 @@ namespace Crafty
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, CraftyConfig.Scale);
 
-            spriteBatch.Draw(CraftyContent.GetTexture("pixel"), new Rectangle(0, 0, 50, 50), Color.Red);
+            ScreenManager.Draw(spriteBatch);
+
 
             spriteBatch.End();
 

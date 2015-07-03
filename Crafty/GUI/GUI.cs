@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Crafty.GUI.Controls;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -6,13 +7,13 @@ namespace Crafty.GUI
 {
     public class GUI
     {
-        public List<Control> Controls = new List<Control>();
+        public List<IControl> Controls = new List<IControl>();
 
         public virtual void Init() { }
 
         public void Update(GameTime gameTime)
         {
-            foreach(Control c in Controls)
+            foreach(IControl c in Controls)
             {
                 c.Update(gameTime);
             }
@@ -20,7 +21,7 @@ namespace Crafty.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(Control c in Controls)
+            foreach(IControl c in Controls)
             {
                 c.Draw(spriteBatch);
             }
