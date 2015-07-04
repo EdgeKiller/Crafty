@@ -51,5 +51,13 @@ namespace Crafty.GUI
                 Init();
         }
 
+        /// <summary>
+        /// Clear the GUI
+        /// </summary>
+        public static void Clear()
+        {
+            actualGUI = null;
+        }
+
     }
 }

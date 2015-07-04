@@ -5,11 +5,11 @@ using Crafty.Utils.Statics;
 
 namespace Crafty.GUI.Controls
 {
-    public class Background : IControl
+    public class ColoredBackground : IControl
     {
         private Color color;
 
-        public Background(Color color)
+        public ColoredBackground(Color color)
         {
             this.color = color;
         }

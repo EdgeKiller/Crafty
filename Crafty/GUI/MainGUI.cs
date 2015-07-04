@@ -5,13 +5,16 @@ using System.Text;
 using Crafty.GUI.Controls;
 using Microsoft.Xna.Framework;
 using Crafty.Utils.Statics;
+using Crafty.Content;
 
 namespace Crafty.GUI
 {
     public class MainGUI : GUI
     {
         private TextButton SingleplayerButton, MultiplayerButton, SettingsButton, ExitButton;
-        private Background Background;
+        private ColoredBackground ColoredBackground;
+        private Cursor Cursor;
+        private RotateLabel Title;
 
         public MainGUI()
         {
@@ -20,7 +23,9 @@ namespace Crafty.GUI
             SettingsButton = new TextButton(CraftyLang.GetData("settings"), new Point(-1, 600));
             ExitButton = new TextButton(CraftyLang.GetData("quit"), new Point(-1, 700));
             ExitButton.OnClick += ExitButton_OnClick;
-            Background = new Background(new Color(127, 140, 141));
+            ColoredBackground = new ColoredBackground(new Color(127, 140, 141));
+            Cursor = new Cursor("cursor");
+            Title = new RotateLabel(CraftySettings.Name, new Point(-1, 150), new Color(243, 156, 18), CraftyContent.GetFont("kraash64"));
         }
 
         void ExitButton_OnClick()
@@ -30,11 +35,13 @@ namespace Crafty.GUI
 
         public override void Init()
         {
-            Controls.Add(Background);
+            Controls.Add(ColoredBackground);
             Controls.Add(SingleplayerButton);
             Controls.Add(MultiplayerButton);
             Controls.Add(SettingsButton);
             Controls.Add(ExitButton);
+            Controls.Add(Title);
+            Controls.Add(Cursor);
         }
         
 

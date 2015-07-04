@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Crafty.Content;
+using Crafty.Utils.Statics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Crafty.Content;
-using Crafty.Utils.Statics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Crafty.GUI.Controls
@@ -13,7 +9,7 @@ namespace Crafty.GUI.Controls
     public class TextButton : IControl
     {
         private string text;
-        private float scale = 1f;
+        private float scale = 0.8f;
         private Rectangle rectangle;
         private Point position;
         private SpriteFont font;
@@ -25,9 +21,11 @@ namespace Crafty.GUI.Controls
         public delegate void OnMouseOverHandler();
         public event OnMouseOverHandler OnMouseOver;
 
+        private float maxScale = 1.1f, minScale = 0.8f, addScale = 0.025f;
+
         public TextButton(string text, Point pos)
         {
-            font = CraftyContent.GetFont("kraash24");
+            font = CraftyContent.GetFont("kraash30");
             this.text = text;
             position = pos;
             if (position.X == -1)
@@ -41,11 +39,11 @@ namespace Crafty.GUI.Controls
         public void Update(GameTime gameTime)
         {
             if (KMState.MouseRec.Intersects(rectangle))
-            {               
-                if(scale < 1.3f)
-                    scale += 0.025f;
-                if (scale + 0.025f > 1.3f)
-                    scale = 1.3f;
+            {
+                if (scale + addScale < maxScale)
+                    scale += addScale;
+                if (scale + addScale > maxScale)
+                    scale = maxScale;
 
                 if (OnMouseOver != null)
                     OnMouseOver.Invoke();
@@ -66,10 +64,10 @@ namespace Crafty.GUI.Controls
             }
             else
             {
-                if (scale > 1f)
-                    scale -= 0.025f;
-                if (scale - 0.025f < 1f)
-                    scale = 1f;
+                if (scale - addScale > minScale)
+                    scale -= addScale;
+                if (scale - addScale < minScale)
+                    scale = minScale;
                 clicked = false;
             }
         }

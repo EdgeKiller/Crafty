@@ -36,9 +36,10 @@ namespace Crafty
             graphics.PreferredBackBufferWidth = (int)CraftyConfig.Resolution.X;
             graphics.PreferredBackBufferHeight = (int)CraftyConfig.Resolution.Y;
             graphics.IsFullScreen = CraftyConfig.Fullscreen;
+            graphics.PreferMultiSampling = CraftyConfig.AntiAlisaing;
+            graphics.SynchronizeWithVerticalRetrace = CraftyConfig.VSync;
             graphics.ApplyChanges();
             this.Window.Title = CraftySettings.Name + " v" + CraftySettings.Version;
-            this.IsMouseVisible = true;
             base.Initialize();
         }
 

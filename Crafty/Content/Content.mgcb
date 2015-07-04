@@ -13,15 +13,27 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin arial24.spritefont
+#begin font_arial24.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
-/build:arial24.spritefont
+/build:font_arial24.spritefont
 
-#begin kraash24.spritefont
+#begin font_kraash24.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
-/build:kraash24.spritefont
+/build:font_kraash24.spritefont
+
+#begin font_kraash30.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:font_kraash30.spritefont
+
+#begin font_kraash64.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:font_kraash64.spritefont
 

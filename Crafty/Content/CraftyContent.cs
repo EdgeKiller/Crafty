@@ -11,7 +11,6 @@ namespace Crafty.Content
     {
 
         private static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
-
         private static Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
         /// <summary>
@@ -20,9 +19,19 @@ namespace Crafty.Content
         /// <param name="device">GraphicsDevice</param>
         public static void Load(ContentManager content, GraphicsDevice device)
         {
+            LoadAllTextures(device);
+            LoadAllFonts(content);
+        }
+
+
+        /// <summary>
+        /// Load all textures from textures folder
+        /// </summary>
+        /// <param name="device"></param>
+        private static void LoadAllTextures(GraphicsDevice device)
+        {
             if (!Directory.Exists(CraftySettings.TextureFolder.FullName))
                 throw new DirectoryNotFoundException("Textures folder missing.");
-
             foreach (FileInfo file in CraftySettings.TextureFolder.GetFiles("*.png"))
             {
                 try
@@ -38,11 +47,30 @@ namespace Crafty.Content
                     throw ex;
                 }
             }
-
-            fonts.Add("arial24", content.Load<SpriteFont>("arial24"));
-            fonts.Add("kraash24", content.Load<SpriteFont>("kraash24"));
-
         }
+
+        /// <summary>
+        /// Load all fonts from content folder
+        /// </summary>
+        /// <param name="content">ContentManager</param>
+        private static void LoadAllFonts(ContentManager content)
+        {
+            if (!Directory.Exists(content.RootDirectory))
+                throw new DirectoryNotFoundException("Content folder missing.");
+            foreach (FileInfo file in new DirectoryInfo(content.RootDirectory).GetFiles("*.xnb"))
+            {
+                try
+                {
+                    if (!fonts.ContainsKey(file.Name.Split('.')[0]))
+                        fonts.Add(file.Name.Split('.')[0], content.Load<SpriteFont>(file.Name.Split('.')[0]));
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Get texture from dictionnary
@@ -63,8 +91,8 @@ namespace Crafty.Content
         /// <returns>Spritefont</returns>
         public static SpriteFont GetFont(string key)
         {
-            if (fonts.ContainsKey(key))
-                return fonts[key];
+            if (fonts.ContainsKey("font_" + key))
+                return fonts["font_" + key];
             return null;
         }
 

@@ -13,6 +13,8 @@ namespace Crafty.Utils.Statics
         public static Matrix Scale { get; set; }
         public static Vector2 Resolution { get; set; }
         public static bool Fullscreen { get; set; }
+        public static bool AntiAlisaing { get; set; }
+        public static bool VSync { get; set; }
 
         /// <summary>
         /// Load config file
@@ -52,8 +54,13 @@ namespace Crafty.Utils.Statics
                                 Scale = Matrix.CreateScale(ScalingFactor);
                                 break;
                             case "fullscreen":
-                                bool fs = Convert.ToBoolean(value);
-                                Fullscreen = fs;
+                                Fullscreen = Convert.ToBoolean(value);
+                                break;
+                            case "antialiasing":
+                                AntiAlisaing = Convert.ToBoolean(value);
+                                break;
+                            case "vsync":
+                                VSync = Convert.ToBoolean(value);
                                 break;
                         }
                     }
