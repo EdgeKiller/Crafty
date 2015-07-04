@@ -67,14 +67,10 @@ namespace Crafty
         /// <param name="gameTime">GameTime</param>
         protected override void Update(GameTime gameTime)
         {
-            KMState.GamePadState = GamePad.GetState(PlayerIndex.One);
             KMState.KeyboardState = Keyboard.GetState();
             KMState.MouseState = Mouse.GetState();
-
-            if (KMState.KeyboardState.IsKeyDown(Keys.Escape))
-                Exit();
-
             ScreenManager.Update(gameTime);
+            GUIManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -86,15 +82,10 @@ namespace Crafty
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, CraftyConfig.Scale);
-
             ScreenManager.Draw(spriteBatch);
-
-
+            GUIManager.Draw(spriteBatch);
             spriteBatch.End();
-
-
             base.Draw(gameTime);
         }
     }

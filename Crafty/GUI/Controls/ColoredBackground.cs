@@ -7,6 +7,8 @@ namespace Crafty.GUI.Controls
 {
     public class ColoredBackground : IControl
     {
+        public bool Hide { get; set; }
+
         private Color color;
 
         public ColoredBackground(Color color)

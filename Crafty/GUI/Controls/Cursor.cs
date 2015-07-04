@@ -7,6 +7,8 @@ namespace Crafty.GUI.Controls
 {
     public class Cursor : IControl
     {
+        public bool Hide { get; set; }
+
         private Point position;
         private Texture2D texture, resetTexture;
 

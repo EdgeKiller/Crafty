@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FE750497-01DB-451D-B362-477260691435}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Crafty</RootNamespace>
     <AssemblyName>Crafty</AssemblyName>
@@ -57,18 +57,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Content\CraftyContent.cs" />
+    <Compile Include="CraftyGame\Map\Tile.cs" />
+    <Compile Include="CraftyGame\Map\World.cs" />
     <Compile Include="GUI\Controls\ColoredBackground.cs" />
     <Compile Include="GUI\Controls\Cursor.cs" />
     <Compile Include="GUI\Controls\IControl.cs" />
     <Compile Include="GUI\Controls\Label.cs" />
     <Compile Include="GUI\Controls\RotateLabel.cs" />
+    <Compile Include="GUI\GameGUI.cs" />
     <Compile Include="GUI\GUIManager.cs" />
     <Compile Include="GUI\GUI.cs" />
     <Compile Include="GUI\Controls\TextButton.cs" />
     <Compile Include="GUI\MainGUI.cs" />
+    <Compile Include="GUI\MainSettingsGUI.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\IScreen.cs" />
     <Compile Include="Screens\MainScreen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
+    <Compile Include="Utils\Others\VariableExtensions.cs" />
     <Compile Include="Utils\Statics\CraftyConfig.cs" />
     <Compile Include="Utils\Statics\CraftySettings.cs" />
     <Compile Include="GameMain.cs" />

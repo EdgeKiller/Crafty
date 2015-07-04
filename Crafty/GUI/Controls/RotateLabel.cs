@@ -6,6 +6,8 @@ namespace Crafty.GUI.Controls
 {
     public class RotateLabel : IControl
     {
+        public bool Hide { get; set; }
+
         private string text;
         private Point position;
         private SpriteFont font;
@@ -50,6 +52,5 @@ namespace Crafty.GUI.Controls
             spriteBatch.DrawString(font, text, new Vector2(position.X, position.Y), color, rotation,
                 new Vector2(font.MeasureString(text).X / 2, font.MeasureString(text).Y / 2), 1.0f, SpriteEffects.None, 1);
         }
-
     }
 }

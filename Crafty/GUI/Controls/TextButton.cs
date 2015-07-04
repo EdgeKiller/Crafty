@@ -8,13 +8,15 @@ namespace Crafty.GUI.Controls
 {
     public class TextButton : IControl
     {
+        public bool Hide { get; set; }
+
         private string text;
         private float scale = 0.8f;
         private Rectangle rectangle;
         private Point position;
         private SpriteFont font;
 
-        private bool clicked = false;
+        public bool clicked = true;
 
         public delegate void OnClickHandler();
         public event OnClickHandler OnClick;
@@ -23,9 +25,14 @@ namespace Crafty.GUI.Controls
 
         private float maxScale = 1.1f, minScale = 0.8f, addScale = 0.025f;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="text">Text</param>
+        /// <param name="pos">Position (-1 to center)</param>
         public TextButton(string text, Point pos)
         {
-            font = CraftyContent.GetFont("kraash30");
+            font = CraftyContent.GetFont("gdc64");
             this.text = text;
             position = pos;
             if (position.X == -1)
@@ -34,8 +41,20 @@ namespace Crafty.GUI.Controls
                 position.Y = (int)((CraftySettings.VirtualScreen.Y / 2));
             this.rectangle = new Rectangle(position.X - (int)(font.MeasureString(text).X / 2), position.Y - (int)(font.MeasureString(text).Y / 2), (int)font.MeasureString(text).X, (int)font.MeasureString(text).Y);
         }
+        
+        /// <summary>
+        /// Set the current text
+        /// </summary>
+        /// <param name="text">Text</param>
+        public void SetText(string text)
+        {
+            this.text = text;
+        }
 
-
+        /// <summary>
+        /// Update the button
+        /// </summary>
+        /// <param name="gameTime">Gametime</param>
         public void Update(GameTime gameTime)
         {
             if (KMState.MouseRec.Intersects(rectangle))
@@ -72,10 +91,15 @@ namespace Crafty.GUI.Controls
             }
         }
 
+        /// <summary>
+        /// Draw the button
+        /// </summary>
+        /// <param name="spriteBatch">Spritebatch</param>
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(font, text, new Vector2(position.X, position.Y), new Color((int)(52 * scale), (int)(73 * scale), (int)(94 * scale)), 0, 
                 new Vector2(font.MeasureString(text).X/2, font.MeasureString(text).Y/2), scale, SpriteEffects.None, 1);
         }
+
     }
 }

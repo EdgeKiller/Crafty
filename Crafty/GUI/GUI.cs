@@ -13,17 +13,21 @@ namespace Crafty.GUI
 
         public void Update(GameTime gameTime)
         {
-            foreach(IControl c in Controls)
+            for (int i = 0; i < Controls.Count; i++)
             {
-                c.Update(gameTime);
+                if (Controls[i] != null)
+                    if (!Controls[i].Hide)
+                        Controls[i].Update(gameTime);
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach(IControl c in Controls)
+            for (int i = 0; i < Controls.Count; i++)
             {
-                c.Draw(spriteBatch);
+                if (Controls[i] != null)
+                    if (!Controls[i].Hide)
+                        Controls[i].Draw(spriteBatch);
             }
         }
 

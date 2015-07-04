@@ -79,7 +79,9 @@ namespace Crafty.Utils.Statics
                 sw.WriteLine("//Crafty Settings");
                 sw.WriteLine("language=" + Language);
                 sw.WriteLine("resolution=" + Resolution.X + ";" + Resolution.Y);
-                sw.WriteLine("fullscreen=" + Fullscreen.ToString());
+                sw.WriteLine("fullscreen=" + Fullscreen.ToString().ToLower());
+                sw.WriteLine("antialiasing=" + AntiAlisaing.ToString().ToLower());
+                sw.WriteLine("vsync=" + VSync.ToString().ToLower());
             }
         }
 
@@ -94,6 +96,8 @@ namespace Crafty.Utils.Statics
                 sw.WriteLine("language=0");
                 sw.WriteLine("resolution=800;600");
                 sw.WriteLine("fullscreen=true");
+                sw.WriteLine("antialiasing=true");
+                sw.WriteLine("vsync=true");
             }
         }
 

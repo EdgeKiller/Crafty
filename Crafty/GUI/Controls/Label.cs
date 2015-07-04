@@ -6,6 +6,8 @@ namespace Crafty.GUI.Controls
 {
     public class Label : IControl
     {
+        public bool Hide { get; set; }
+
         private string text;
         private Point position;
         private SpriteFont font;

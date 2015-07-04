@@ -10,19 +10,30 @@ namespace Crafty.Screens
 {
     public class MainScreen : IScreen
     {
+        /// <summary>
+        /// Init
+        /// </summary>
         public void Init()
         {
             GUIManager.SetGUI(new MainGUI());
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="gameTime">Gametime</param>
         public void Update(GameTime gameTime)
         {
-            GUIManager.Update(gameTime);
+            
         }
 
+        /// <summary>
+        /// Draw
+        /// </summary>
+        /// <param name="spriteBatch">Spritebatch</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            GUIManager.Draw(spriteBatch);
+            
         }
     }
 }

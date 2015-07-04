@@ -22,6 +22,5 @@ namespace Crafty.Utils.Statics
                 return new Rectangle(MousePos.X, MousePos.Y, 1, 1);
             }
         }
-        public static GamePadState GamePadState { get; set; }
     }
 }
