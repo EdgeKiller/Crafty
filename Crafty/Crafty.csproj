@@ -57,11 +57,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Content\CraftyContent.cs" />
+    <Compile Include="CraftyGame\Camera.cs" />
     <Compile Include="CraftyGame\Map\Tile.cs" />
     <Compile Include="CraftyGame\Map\World.cs" />
+    <Compile Include="CraftyGame\Player.cs" />
     <Compile Include="GUI\Controls\ColoredBackground.cs" />
     <Compile Include="GUI\Controls\Cursor.cs" />
     <Compile Include="GUI\Controls\IControl.cs" />
+    <Compile Include="GUI\Controls\ImageBackground.cs" />
     <Compile Include="GUI\Controls\Label.cs" />
     <Compile Include="GUI\Controls\RotateLabel.cs" />
     <Compile Include="GUI\GameGUI.cs" />
@@ -74,6 +77,7 @@
     <Compile Include="Screens\IScreen.cs" />
     <Compile Include="Screens\MainScreen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
+    <Compile Include="Utils\Statics\CraftyConverter.cs" />
     <Compile Include="Utils\Others\VariableExtensions.cs" />
     <Compile Include="Utils\Statics\CraftyConfig.cs" />
     <Compile Include="Utils\Statics\CraftySettings.cs" />

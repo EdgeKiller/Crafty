@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Crafty
+﻿namespace Crafty
 {
     public static class VariableExtensions
     {
@@ -23,6 +18,5 @@ namespace Crafty
             else
                 return false;
         }
-
     }
 }

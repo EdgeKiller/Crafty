@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Crafty.Content;
 
 namespace Crafty.GUI
 {
     public class GameGUI : GUI
     {
-        Cursor Cursor;
+        private Cursor Cursor;
 
         /// <summary>
         /// Constructor

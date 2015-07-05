@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Crafty.Utils.Statics
 {
@@ -62,6 +63,18 @@ namespace Crafty.Utils.Statics
                             case "vsync":
                                 VSync = Convert.ToBoolean(value);
                                 break;
+                            case "key_up":
+                                CraftyControl.UpKey = CraftyConverter.StringToKeys(value);
+                                break;
+                            case "key_down":
+                                CraftyControl.DownKey = CraftyConverter.StringToKeys(value);
+                                break;
+                            case "key_left":
+                                CraftyControl.LeftKey = CraftyConverter.StringToKeys(value);
+                                break;
+                            case "key_right":
+                                CraftyControl.RightKey = CraftyConverter.StringToKeys(value);
+                                break;
                         }
                     }
                 }
@@ -82,6 +95,10 @@ namespace Crafty.Utils.Statics
                 sw.WriteLine("fullscreen=" + Fullscreen.ToString().ToLower());
                 sw.WriteLine("antialiasing=" + AntiAlisaing.ToString().ToLower());
                 sw.WriteLine("vsync=" + VSync.ToString().ToLower());
+                sw.WriteLine("key_up=" + CraftyControl.UpKey.ToString());
+                sw.WriteLine("key_down=" + CraftyControl.DownKey.ToString());
+                sw.WriteLine("key_left=" + CraftyControl.LeftKey.ToString());
+                sw.WriteLine("key_right=" + CraftyControl.RightKey.ToString());
             }
         }
 
@@ -98,9 +115,21 @@ namespace Crafty.Utils.Statics
                 sw.WriteLine("fullscreen=true");
                 sw.WriteLine("antialiasing=true");
                 sw.WriteLine("vsync=true");
+                sw.WriteLine("key_up=W");
+                sw.WriteLine("key_down=S");
+                sw.WriteLine("key_left=A");
+                sw.WriteLine("key_right=D");
             }
         }
 
 
+    }
+
+    public static class CraftyControl
+    {
+        public static Keys UpKey { get; set; }
+        public static Keys DownKey { get; set; }
+        public static Keys LeftKey { get; set; }
+        public static Keys RightKey { get; set; }
     }
 }

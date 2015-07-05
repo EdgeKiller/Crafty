@@ -82,10 +82,8 @@ namespace Crafty
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, CraftyConfig.Scale);
             ScreenManager.Draw(spriteBatch);
             GUIManager.Draw(spriteBatch);
-            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

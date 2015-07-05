@@ -1,4 +1,5 @@
 ﻿using Crafty.GUI.Controls;
+using Crafty.Utils.Statics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -38,7 +39,11 @@ namespace Crafty.GUI
         public static void Draw(SpriteBatch spriteBatch)
         {
             if (actualGUI != null)
+            {
+                spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, CraftyConfig.Scale);
                 actualGUI.Draw(spriteBatch);
+                spriteBatch.End();
+            }
         }
 
         /// <summary>

@@ -9,7 +9,8 @@ namespace Crafty.GUI
     public class MainGUI : GUI
     {
         private TextButton SingleplayerButton, MultiplayerButton, SettingsButton, ExitButton;
-        private ColoredBackground ColoredBackground;
+        //private ColoredBackground ColoredBackground;
+        private ImageBackground Background;
         private Cursor Cursor;
         private RotateLabel Title;
 
@@ -25,7 +26,8 @@ namespace Crafty.GUI
             SettingsButton.OnClick += SettingsButton_OnClick;
             ExitButton = new TextButton(CraftyLang.GetData("quit"), new Point(-1, 700));
             ExitButton.OnClick += ExitButton_OnClick;
-            ColoredBackground = new ColoredBackground(new Color(127, 140, 141));
+            //ColoredBackground = new ColoredBackground(new Color(127, 140, 141));
+            Background = new ImageBackground(CraftyContent.GetTexture("background"));
             Cursor = new Cursor("cursor");
             Title = new RotateLabel(CraftySettings.Name, new Point(-1, 150), new Color(243, 156, 18), CraftyContent.GetFont("gdc128"));
         }
@@ -59,7 +61,8 @@ namespace Crafty.GUI
         /// </summary>
         public override void Init()
         {
-            Controls.Add(ColoredBackground);
+            //Controls.Add(ColoredBackground);
+            Controls.Add(Background);
             Controls.Add(SingleplayerButton);
             Controls.Add(MultiplayerButton);
             Controls.Add(SettingsButton);

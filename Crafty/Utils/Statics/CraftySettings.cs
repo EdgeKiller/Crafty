@@ -12,6 +12,10 @@ namespace Crafty.Utils.Statics
         public static readonly string ConfigFile = "crafty.cfg";
         public static readonly DirectoryInfo TextureFolder = new DirectoryInfo("resources/textures");
 
+        public static readonly int TileSize = 32;
+        public static readonly Point WorldSize = new Point(1000, 300);
+        public static readonly Point PlayerSize = new Point(32, 64);
+
         public static Game Game { get; set; }
 
         public static readonly Point VirtualScreen = new Point(1920, 1080);

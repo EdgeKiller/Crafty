@@ -18,7 +18,9 @@ namespace Crafty.Utils.Statics
             {"antialiasing", new string[]{"Anti-Aliasing","Anticrénelage"}},
 
             // BLOCK
-            {"block_dirt", new string[]{"Dirt bloc", "Bloc de terre"}}
+            {"block_dirt", new string[]{"Dirt bloc", "Bloc de terre"}},
+            {"block_grass", new string[]{"Grass bloc", "Bloc d'herbe"}}
+
         };
 
         /// <summary>
