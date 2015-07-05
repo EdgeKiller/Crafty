@@ -50,6 +50,8 @@ namespace Crafty.CraftyGame.Map
 
             Tiles[0, 5] = new Tile(2, new Point(0, 5));
             Tiles[1, 5] = new Tile(2, new Point(1,5));
+            Tiles[3, 10] = new Tile(2, new Point(3, 10));
+
 
             Save(worldName);
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Crafty.Utils.Statics;
+using Microsoft.Xna.Framework;
 
 namespace Crafty.CraftyGame
 {
@@ -13,7 +14,8 @@ namespace Crafty.CraftyGame
         /// <param name="y">Y as int</param>
         public static void SetPosition(int x, int y)
         {
-            Position = new Point(x, y);
+            Position = new Point(x - (CraftySettings.VirtualScreen.X / 2),
+                y - (CraftySettings.VirtualScreen.Y / 2));
             if (Position.X < 0)
                 Position.X = 0;
             if (Position.Y < 0)
