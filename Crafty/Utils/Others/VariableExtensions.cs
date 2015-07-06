@@ -1,4 +1,5 @@
-﻿namespace Crafty
+﻿using Microsoft.Xna.Framework;
+namespace Crafty
 {
     public static class VariableExtensions
     {
@@ -18,5 +19,6 @@
             else
                 return false;
         }
+
     }
 }

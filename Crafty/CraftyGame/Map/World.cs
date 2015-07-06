@@ -48,9 +48,9 @@ namespace Crafty.CraftyGame.Map
                 }
             }
 
-            Tiles[0, 5] = new Tile(2, new Point(0, 5));
-            Tiles[1, 5] = new Tile(2, new Point(1,5));
-            Tiles[3, 10] = new Tile(2, new Point(3, 10));
+            Tiles[0, 10] = new Tile(2, new Point(0, 10));
+            Tiles[1, 10] = new Tile(1, new Point(1,10));
+            Tiles[3, 15] = new Tile(2, new Point(3, 15));
 
 
             Save(worldName);
@@ -157,7 +157,7 @@ namespace Crafty.CraftyGame.Map
         /// <param name="spriteBatch">Spritebatch</param>
         public static void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, CraftyConfig.Scale);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.AnisotropicClamp, null, null, null, CraftyConfig.Scale);
             for (int x = minX; x < maxX; x++)
             {
                 for (int y = minY; y < maxY; y++)

@@ -15,69 +15,22 @@ namespace Crafty.CraftyGame
         public int ID { get { return id; } }
         private int id;
 
-        public Point Position { get { return position; } }
-        private Point position, futurPosition;
+        private Vector2 Position, Velocity;
+        private Rectangle Hitbox;
 
-        public int Speed { get { return speed; } }
-        private int speed;
-
-        private Rectangle hitbox;
-
-        bool collide = false;
-        float Gravity = 2.0f;
+        private bool HasJumped;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="ID">ID, only useful in multiplayer mode</param>
-        public Player(int id)
+        public Player(int id, Vector2 pos)
         {
-            position = new Point(0, 0);
             this.id = id;
-            hitbox = new Rectangle(position.X, position.Y, CraftySettings.PlayerSize.X, CraftySettings.PlayerSize.Y);
-            speed = 4;
-
-        }
-
-        /// <summary>
-        /// Translate the player
-        /// </summary>
-        /// <param name="x">X as int</param>
-        /// <param name="y">Y as int</param>
-        public void Translate(int x = 0, int y = 0)
-        {
-            futurPosition += new Point(x, y);
-            Camera.SetPosition(futurPosition.X, futurPosition.Y);
-            hitbox.X = futurPosition.X - Camera.Position.X;
-            hitbox.Y = futurPosition.Y - Camera.Position.Y;
-        }
-
-        /// <summary>
-        /// Verify position to manage collision
-        /// </summary>
-        public void VerifyPosition()
-        {
-            collide = false;
-            foreach (Tile t in GetNearTiles())
-            {
-                if (t.ID != 0 && t.Collide)
-                {
-                    if (t.Hitbox.Intersects(hitbox))
-                    {
-                        collide = true;
-                        Gravity = 2.0f;
-                        break;
-                    }
-                }
-            }
-
-            if (!collide)
-                position = futurPosition;
-
-            Camera.SetPosition(position.X, position.Y);
-            hitbox.X = position.X - Camera.Position.X;
-            hitbox.Y = position.Y - Camera.Position.Y;
-
+            Position = pos;
+            Velocity = Vector2.Zero;
+            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, CraftySettings.PlayerSize.X, CraftySettings.PlayerSize.Y);
+            HasJumped = true;
         }
 
         /// <summary>
@@ -86,23 +39,46 @@ namespace Crafty.CraftyGame
         /// <param name="gameTime">Gametime</param>
         public void Update(GameTime gameTime)
         {
-            futurPosition = position;
+            HasJumped = true ;
+
+            List<Tile> fTiles = GetNearTiles();
+
+            foreach (Tile t in fTiles)
+            {
+                if ((Hitbox.Bottom + (int)Velocity.Y) >= t.Hitbox.Top && t.Collide 
+                    && (Hitbox.Left <= t.Hitbox.Right) && (Hitbox.Right >= t.Hitbox.Left))
+                {
+                    Velocity.Y = t.Hitbox.Top - Hitbox.Bottom;
+                    HasJumped = false;
+                    break;
+                }
+            }
+
+            Position += Velocity;
+            Hitbox.X = (int)Position.X;
+            Hitbox.Y = (int)Position.Y;
 
             if (KMState.KeyboardState.IsKeyDown(CraftyControl.LeftKey))
             {
-                Translate(-speed, 0);
+                Velocity.X = -3f;
             }
-            if (KMState.KeyboardState.IsKeyDown(CraftyControl.RightKey))
+            else if (KMState.KeyboardState.IsKeyDown(CraftyControl.RightKey))
             {
-                Translate(speed, 0);
+                Velocity.X = 3f;
+            }
+            else
+            {
+                Velocity.X = 0f;
             }
 
-            if (Gravity <= 3.0f)
-                Gravity += 0.01f;
-            Translate(0, (int)((Gravity * gameTime.ElapsedGameTime.Milliseconds) / 6));
+            if(KMState.KeyboardState.IsKeyDown(CraftyControl.JumpKey) && !HasJumped)
+            {
+                Position.Y -= 10f;
+                Velocity.Y = -15f;
+                HasJumped = true;
+            }
 
-            VerifyPosition();
-
+            Velocity.Y += 0.25f;
 
         }
 
@@ -114,51 +90,57 @@ namespace Crafty.CraftyGame
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, CraftyConfig.Scale);
 
-            spriteBatch.Draw(CraftyContent.GetTexture("pixel"), hitbox, Color.Red);
+            spriteBatch.Draw(CraftyContent.GetTexture("pixel"), Hitbox, Color.Red);
 
             spriteBatch.End();
         }
-
 
         private List<Tile> GetNearTiles()
         {
             List<Tile> tiles = new List<Tile>();
 
-            int bottomTileY = (int)((position.Y) / CraftySettings.TileSize);
-            int bottomTileX = (int)((position.X) / CraftySettings.TileSize);
+            int bottomTileY = (int)((Position.Y) / CraftySettings.TileSize);
+            int bottomTileX = (int)((Position.X) / CraftySettings.TileSize);
 
-            tiles.Add(World.Tiles[bottomTileX, bottomTileY]);
-
-            //Left tile column
-            if (bottomTileX - 1 >= 0)
+            if (bottomTileY >= 0)
             {
-                tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY]);
+
+                //Left tile column
+                if (bottomTileX - 1 >= 0)
+                {
+                    tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY]);
+                    if (bottomTileY - 1 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY - 1]);
+                    if (bottomTileY + 1 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY + 1]);
+                    if (bottomTileY + 2 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY + 2]);
+                    if (bottomTileY + 3 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY + 3]);
+                }
+
+                //Right tile column
+                if (bottomTileX + 1 <= CraftySettings.WorldSize.X)
+                {
+                    tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY]);
+                    if (bottomTileY - 1 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY - 1]);
+                    if (bottomTileY + 1 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY + 1]);
+                    if (bottomTileY + 2 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY + 2]);
+                    if (bottomTileY + 3 >= 0)
+                        tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY + 3]);
+                }
+
+                //Center tile column
                 if (bottomTileY - 1 >= 0)
-                    tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY - 1]);
-                if (bottomTileY + 1 >= 0)
-                    tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY + 1]);
+                    tiles.Add(World.Tiles[bottomTileX, bottomTileY - 1]);
                 if (bottomTileY + 2 >= 0)
-                    tiles.Add(World.Tiles[bottomTileX - 1, bottomTileY + 2]);
+                    tiles.Add(World.Tiles[bottomTileX, bottomTileY + 2]);
+                if (bottomTileY + 3 >= 0)
+                    tiles.Add(World.Tiles[bottomTileX, bottomTileY + 3]);
             }
-
-            //Right tile column
-            if (bottomTileX + 1 <= CraftySettings.WorldSize.X)
-            {
-                tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY]);
-                if (bottomTileY - 1 >= 0)
-                    tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY - 1]);
-                if (bottomTileY + 1 >= 0)
-                    tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY + 1]);
-                if (bottomTileY + 2 >= 0)
-                    tiles.Add(World.Tiles[bottomTileX + 1, bottomTileY + 2]);
-            }
-
-            //Center tile column
-            if (bottomTileY - 1 >= 0)
-                tiles.Add(World.Tiles[bottomTileX, bottomTileY - 1]);
-            if (bottomTileY + 2 >= 0)
-                tiles.Add(World.Tiles[bottomTileX, bottomTileY + 2]);
-
             return tiles;
         }
 

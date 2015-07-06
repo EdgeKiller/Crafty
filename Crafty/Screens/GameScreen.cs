@@ -33,7 +33,7 @@ namespace Crafty.Screens
             GUIManager.SetGUI(new GameGUI());
             World.Create("world1");
             //World.Load(World.Name);
-            player = new Player(0);
+            player = new Player(0, Vector2.Zero);
         }
 
         /// <summary>

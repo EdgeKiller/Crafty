@@ -75,6 +75,9 @@ namespace Crafty.Utils.Statics
                             case "key_right":
                                 CraftyControl.RightKey = CraftyConverter.StringToKeys(value);
                                 break;
+                            case "key_jump":
+                                CraftyControl.JumpKey = CraftyConverter.StringToKeys(value);
+                                break;
                         }
                     }
                 }
@@ -99,6 +102,7 @@ namespace Crafty.Utils.Statics
                 sw.WriteLine("key_down=" + CraftyControl.DownKey.ToString());
                 sw.WriteLine("key_left=" + CraftyControl.LeftKey.ToString());
                 sw.WriteLine("key_right=" + CraftyControl.RightKey.ToString());
+                sw.WriteLine("key_jump=" + CraftyControl.JumpKey.ToString());
             }
         }
 
@@ -119,6 +123,7 @@ namespace Crafty.Utils.Statics
                 sw.WriteLine("key_down=S");
                 sw.WriteLine("key_left=A");
                 sw.WriteLine("key_right=D");
+                sw.WriteLine("key_jump=Space");
             }
         }
 
@@ -131,5 +136,6 @@ namespace Crafty.Utils.Statics
         public static Keys DownKey { get; set; }
         public static Keys LeftKey { get; set; }
         public static Keys RightKey { get; set; }
+        public static Keys JumpKey { get; set; }
     }
 }
